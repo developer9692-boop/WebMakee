@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🌟 WebMaker Bot – Create Beautiful Wishes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;color:#fff;
+  }
+  /* particles */
+  .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .particle{position:absolute;background:#fff;border-radius:50%;animation:twinkle linear infinite}
+  @keyframes twinkle{0%,100%{opacity:1}50%{opacity:.1}}
+
+  .hero{
+    position:relative;z-index:10;
+    max-width:700px;margin:0 auto;
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:60px 24px;gap:32px;
+    animation:fadeIn .8s ease;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  .logo{font-size:80px;animation:float 3s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+  h1{
+    font-size:clamp(2.2rem,7vw,3.5rem);
+    font-weight:800;text-align:center;
+    background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .subtitle{
+    text-align:center;color:rgba(255,255,255,.7);
+    font-size:clamp(1rem,3vw,1.2rem);max-width:500px;line-height:1.6;
+  }
+  .cta-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(135deg,#7c3aed,#4f46e5);
+    color:#fff;text-decoration:none;
+    padding:16px 44px;border-radius:60px;
+    font-size:1.1rem;font-weight:600;
+    box-shadow:0 8px 40px rgba(124,58,237,.4);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .cta-btn:hover{transform:translateY(-4px);box-shadow:0 16px 60px rgba(124,58,237,.6)}
+
+  .templates{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:16px;width:100%;max-width:600px;
+  }
+  .tpl{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;padding:20px 12px;
+    text-align:center;
+    transition:transform .2s,background .2s;cursor:default;
+  }
+  .tpl:hover{transform:translateY(-6px);background:rgba(255,255,255,.12)}
+  .tpl .emoji{font-size:2.2rem;margin-bottom:8px}
+  .tpl .label{font-size:.85rem;font-weight:600;color:rgba(255,255,255,.8)}
+
+  .features{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:16px;width:100%;max-width:600px;
+  }
+  .feat{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;padding:18px;display:flex;align-items:flex-start;gap:12px;
+  }
+  .feat .icon{font-size:1.6rem}
+  .feat .text strong{display:block;font-size:.9rem;margin-bottom:4px}
+  .feat .text span{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.4}
+
+  footer{color:rgba(255,255,255,.4);font-size:.8rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<div class="hero">
+  <div class="logo">🌟</div>
+  <h1>WebMaker Bot</h1>
+  <p class="subtitle">
+    Create beautiful, animated celebration websites in seconds —
+    right from Telegram! Share joy with your loved ones. 💝
+  </p>
+  <a class="cta-btn" href="https://t.me/YOUR_BOT_USERNAME" target="_blank">
+    ✈️ Open Bot on Telegram
+  </a>
+
+  <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:-8px">Available Templates</p>
+  <div class="templates">
+    <div class="tpl"><div class="emoji">🎂</div><div class="label">Birthday</div></div>
+    <div class="tpl"><div class="emoji">💕</div><div class="label">Love Day</div></div>
+    <div class="tpl"><div class="emoji">👩</div><div class="label">Mother's Day</div></div>
+    <div class="tpl"><div class="emoji">👨</div><div class="label">Father's Day</div></div>
+    <div class="tpl"><div class="emoji">🪔</div><div class="label">Diwali</div></div>
+    <div class="tpl"><div class="emoji">🌊</div><div class="label">Chhath Puja</div></div>
+    <div class="tpl"><div class="emoji">🪢</div><div class="label">Raksha Bandhan</div></div>
+  </div>
+
+  <div class="features">
+    <div class="feat">
+      <div class="icon">⚡</div>
+      <div class="text"><strong>Instant Creation</strong><span>Your website is ready in seconds</span></div>
+    </div>
+    <div class="feat">
+      <div class="icon">✨</div>
+      <div class="text"><strong>Animations</strong><span>Beautiful effects on every page</span></div>
+    </div>
+    <div class="feat">
+      <div class="icon">📤</div>
+      <div class="text"><strong>Easy Sharing</strong><span>One tap to share the link</span></div>
+    </div>
+    <div class="feat">
+      <div class="icon">🔒</div>
+      <div class="text"><strong>No Backend</strong><span>Data stored in link — 100% private</span></div>
+    </div>
+  </div>
+
+  <footer>Built with ❤️ · Powered by WebMaker Bot</footer>
+</div>
+
+<script>
+const pc=document.getElementById('particles');
+for(let i=0;i<60;i++){
+  const el=document.createElement('div');el.className='particle';
+  const s=Math.random()*3+1;
+  el.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;opacity:${Math.random()*.8+.1}`;
+  pc.appendChild(el);
+}
+</script>
+</body>
+</html>

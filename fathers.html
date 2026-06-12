@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>👨 Happy Father's Day!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(160deg,#f0f4ff 0%,#d6e4ff 50%,#c2d8ff 100%);
+    font-family:'Lato',sans-serif;overflow-x:hidden;
+  }
+  .icons{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .icon-float{position:absolute;top:-40px;animation:fall linear infinite;font-size:22px}
+  @keyframes fall{
+    0%{top:-40px;opacity:0;transform:rotate(0deg)}10%{opacity:.8}90%{opacity:.5}
+    100%{top:110vh;transform:rotate(360deg) translateX(40px);opacity:0}
+  }
+  .wrapper{
+    position:relative;z-index:10;max-width:540px;margin:0 auto;
+    min-height:100vh;padding:40px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    animation:rise .9s ease;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .big-icon{font-size:80px;animation:nod 2s ease-in-out infinite}
+  @keyframes nod{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,7vw,3rem);
+    color:#1a237e;text-align:center;
+  }
+  .name-box{
+    background:linear-gradient(135deg,#5c6bc0,#1a237e);
+    color:#fff;padding:16px 44px;border-radius:60px;
+    font-size:clamp(1.5rem,5vw,2rem);font-weight:700;
+    box-shadow:0 8px 32px rgba(26,35,126,.3);
+    animation:glow 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes glow{from{box-shadow:0 8px 32px rgba(26,35,126,.3)}to{box-shadow:0 12px 50px rgba(92,107,192,.7)}}
+  .from-badge{
+    background:#fff;border:2px solid #5c6bc0;
+    color:#1a237e;padding:10px 28px;border-radius:40px;
+    font-size:.95rem;font-weight:600;
+    box-shadow:0 4px 16px rgba(26,35,126,.15);
+  }
+  .card{
+    background:#fff;border-radius:24px;padding:28px 30px;max-width:420px;width:100%;
+    box-shadow:0 8px 40px rgba(92,107,192,.2);border-top:4px solid #5c6bc0;
+    text-align:center;line-height:1.8;color:#444;font-size:1.05rem;
+  }
+  .row{font-size:2.4rem;letter-spacing:.5em;animation:sway 3s ease-in-out infinite alternate}
+  @keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+  .quote{
+    background:linear-gradient(135deg,#e8eaf6,#f0f4ff);
+    border-left:4px solid #5c6bc0;border-radius:12px;
+    padding:20px 24px;color:#1a237e;
+    font-style:italic;font-size:1.05rem;line-height:1.7;max-width:420px;
+  }
+  .share-btn{
+    background:linear-gradient(135deg,#5c6bc0,#1a237e);
+    color:#fff;border:none;padding:14px 40px;border-radius:50px;
+    font-size:1rem;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 30px rgba(26,35,126,.3);transition:transform .2s;
+  }
+  .share-btn:hover{transform:translateY(-3px)}
+</style>
+</head>
+<body>
+<div class="icons" id="iconsContainer"></div>
+<div class="wrapper">
+  <div class="big-icon">👨</div>
+  <h1>Happy Father's Day!</h1>
+  <div class="name-box" id="dadName">Dear Dad</div>
+  <div class="from-badge" id="fromBadge">💙 With love from …</div>
+  <div class="row">🏆👔⭐🎖️🌟</div>
+  <div class="card">
+    Behind every great child is a truly amazing father. You are our hero, our guide, and our greatest strength.
+    Thank you for everything you do, Dad! 🙏
+  </div>
+  <div class="quote">
+    "A father is someone you look up to no matter how tall you grow." 💙
+  </div>
+  <button class="share-btn" onclick="share()">💙 Share This Wish</button>
+</div>
+
+<script>
+function getParams(){
+  const hash=location.hash.slice(1);const p={};
+  new URLSearchParams(hash).forEach((v,k)=>p[k]=decodeURIComponent(v));return p;
+}
+const p=getParams();
+document.getElementById('dadName').textContent=p.name||'Dear Dad';
+document.getElementById('fromBadge').textContent=`💙 With love from ${p.from_name||'Your Child'}`;
+document.title=`👨 Happy Father\'s Day ${p.name||''}!`;
+
+const ic=document.getElementById('iconsContainer');
+const emojis=['⭐','🏆','🎖️','💪','🌟','👑','🎯'];
+for(let i=0;i<20;i++){
+  const el=document.createElement('div');el.className='icon-float';
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.cssText=`left:${Math.random()*100}%;font-size:${14+Math.random()*16}px;animation-duration:${5+Math.random()*7}s;animation-delay:${Math.random()*7}s;`;
+  ic.appendChild(el);
+}
+
+async function share(){
+  if(navigator.share) await navigator.share({title:`Happy Father's Day ${p.name||''}!`,url:location.href});
+  else{await navigator.clipboard.writeText(location.href);alert('Link copied! 💙');}
+}
+</script>
+</body>
+</html>

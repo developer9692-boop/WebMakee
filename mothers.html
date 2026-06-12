@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>👩 Happy Mother's Day!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(160deg,#fff9fb 0%,#ffe4f0 50%,#ffd6e4 100%);
+    font-family:'Lato',sans-serif;overflow-x:hidden;
+  }
+  /* Floating flowers */
+  .flowers{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .flower{position:absolute;top:-40px;animation:flowerFall linear infinite;font-size:22px}
+  @keyframes flowerFall{
+    0%{top:-40px;opacity:0;transform:rotate(0deg) translateX(0)}
+    10%{opacity:1}90%{opacity:.7}
+    100%{top:110vh;transform:rotate(360deg) translateX(50px);opacity:0}
+  }
+  .wrapper{
+    position:relative;z-index:10;max-width:540px;margin:0 auto;
+    min-height:100vh;padding:40px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    animation:rise .9s ease;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .icon{font-size:80px;animation:bloom 2s ease-in-out infinite alternate}
+  @keyframes bloom{from{transform:scale(1) rotate(-5deg)}to{transform:scale(1.1) rotate(5deg)}}
+  h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,7vw,3rem);
+    color:#c2185b;text-align:center;
+    text-shadow:0 2px 20px rgba(194,24,91,.2);
+  }
+  .name-box{
+    background:linear-gradient(135deg,#ff8fab,#c2185b);
+    color:#fff;padding:16px 44px;border-radius:60px;
+    font-size:clamp(1.5rem,5vw,2rem);font-weight:700;
+    box-shadow:0 8px 32px rgba(194,24,91,.3);
+    animation:glow 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes glow{from{box-shadow:0 8px 32px rgba(194,24,91,.3)}to{box-shadow:0 12px 50px rgba(194,24,91,.6)}}
+  .from-badge{
+    background:#fff;border:2px solid #ff8fab;
+    color:#c2185b;padding:10px 28px;border-radius:40px;
+    font-size:.95rem;font-weight:600;
+    box-shadow:0 4px 16px rgba(194,24,91,.15);
+  }
+  .card{
+    background:#fff;border-radius:24px;
+    padding:28px 30px;max-width:420px;width:100%;
+    box-shadow:0 8px 40px rgba(255,143,171,.2);
+    border-top:4px solid #ff8fab;
+    text-align:center;line-height:1.8;color:#555;
+    font-size:1.05rem;
+  }
+  .flowers-row{font-size:2.4rem;letter-spacing:.5em;animation:sway 3s ease-in-out infinite alternate}
+  @keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+  .quote{
+    background:linear-gradient(135deg,#ffe4f0,#fff9fb);
+    border-left:4px solid #ff8fab;border-radius:12px;
+    padding:20px 24px;color:#c2185b;
+    font-style:italic;font-size:1.05rem;line-height:1.7;max-width:420px;
+  }
+  .share-btn{
+    background:linear-gradient(135deg,#ff8fab,#c2185b);
+    color:#fff;border:none;padding:14px 40px;border-radius:50px;
+    font-size:1rem;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 30px rgba(194,24,91,.3);transition:transform .2s;
+  }
+  .share-btn:hover{transform:translateY(-3px)}
+  /* sparkles */
+  .sparkle{position:fixed;pointer-events:none;z-index:3;font-size:20px;animation:sparkle 1.5s ease-out forwards}
+  @keyframes sparkle{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.3) translateY(-80px)}}
+</style>
+</head>
+<body>
+<div class="flowers" id="flowersContainer"></div>
+<div class="wrapper">
+  <div class="icon">🌸</div>
+  <h1>Happy Mother's Day!</h1>
+  <div class="name-box" id="momName">Dear Mom</div>
+  <div class="from-badge" id="fromBadge">💝 With love from …</div>
+  <div class="flowers-row">🌸🌺🌼🌷🌹</div>
+  <div class="card">
+    A mother is she who can take the place of all others but whose place no one else can take.
+    You are our world, our strength, and our greatest blessing. 🙏
+  </div>
+  <div class="quote">
+    "To the world you are a mother, but to your family you are the world." 🌍
+  </div>
+  <button class="share-btn" onclick="share()">🌸 Share This Wish</button>
+</div>
+
+<script>
+function getParams(){
+  const hash=location.hash.slice(1);const p={};
+  new URLSearchParams(hash).forEach((v,k)=>p[k]=decodeURIComponent(v));return p;
+}
+const p=getParams();
+document.getElementById('momName').textContent=p.name||'Dear Mom';
+document.getElementById('fromBadge').textContent=`💝 With love from ${p.from_name||'Your Child'}`;
+document.title=`🌸 Happy Mother's Day ${p.name||''}!`;
+
+const fc=document.getElementById('flowersContainer');
+const flowers=['🌸','🌺','🌼','🌷','🌻','🌹','💮','🏵️'];
+for(let i=0;i<25;i++){
+  const el=document.createElement('div');el.className='flower';
+  el.textContent=flowers[Math.floor(Math.random()*flowers.length)];
+  el.style.cssText=`left:${Math.random()*100}%;font-size:${14+Math.random()*16}px;animation-duration:${5+Math.random()*7}s;animation-delay:${Math.random()*7}s;`;
+  fc.appendChild(el);
+}
+
+// Click sparkles
+document.addEventListener('click',e=>{
+  for(let i=0;i<6;i++){
+    const el=document.createElement('div');el.className='sparkle';
+    el.textContent=['✨','🌸','💕','⭐'][Math.floor(Math.random()*4)];
+    el.style.cssText=`left:${e.clientX+Math.random()*40-20}px;top:${e.clientY+Math.random()*40-20}px`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1500);
+  }
+});
+
+async function share(){
+  if(navigator.share) await navigator.share({title:`Happy Mother's Day ${p.name||''}!`,url:location.href});
+  else{await navigator.clipboard.writeText(location.href);alert('Link copied! 🌸');}
+}
+</script>
+</body>
+</html>

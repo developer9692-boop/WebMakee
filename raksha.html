@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🪢 Happy Raksha Bandhan!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato:wght@300;400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(160deg,#fff8e1 0%,#ffe0b2 40%,#ffcc80 100%);
+    font-family:'Lato',sans-serif;overflow-x:hidden;position:relative;
+  }
+  /* Floating items */
+  .floaties{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .floaty{position:absolute;top:-40px;animation:fall linear infinite}
+  @keyframes fall{
+    0%{top:-40px;opacity:0}10%{opacity:.8}90%{opacity:.6}
+    100%{top:110vh;transform:rotate(360deg) translateX(30px);opacity:0}
+  }
+  .wrapper{
+    position:relative;z-index:10;max-width:540px;margin:0 auto;
+    min-height:100vh;padding:40px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    animation:rise .9s ease;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .rakhi-icon{
+    font-size:90px;
+    animation:swing 2s ease-in-out infinite;
+    filter:drop-shadow(0 4px 16px rgba(200,100,0,.3));
+  }
+  @keyframes swing{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+  h1{
+    font-family:'Cinzel',serif;
+    font-size:clamp(1.8rem,6vw,2.8rem);
+    color:#bf360c;text-align:center;
+    text-shadow:0 2px 20px rgba(191,54,12,.2);
+  }
+  .names-plate{
+    background:#fff;border-radius:60px;
+    padding:18px 40px;
+    box-shadow:0 8px 40px rgba(255,152,0,.25);
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;
+  }
+  .name-pill{
+    font-size:1.3rem;font-weight:600;color:#bf360c;
+    background:linear-gradient(135deg,#ffe0b2,#ffcc80);
+    padding:8px 24px;border-radius:40px;
+  }
+  .mid{font-size:1.8rem}
+  .from-badge{
+    background:linear-gradient(135deg,#ff8f00,#bf360c);
+    color:#fff;padding:10px 28px;border-radius:40px;
+    font-size:.95rem;font-weight:600;
+    box-shadow:0 4px 20px rgba(191,54,12,.3);
+  }
+  .card{
+    background:#fff;border-radius:24px;padding:28px 30px;max-width:420px;width:100%;
+    box-shadow:0 8px 40px rgba(255,152,0,.2);border-top:4px solid #ff8f00;
+    text-align:center;line-height:1.8;color:#555;font-size:1.05rem;
+  }
+  .row{font-size:2.2rem;letter-spacing:.5em;animation:pulse 1.5s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .quote{
+    background:linear-gradient(135deg,#fff8e1,#ffe0b2);
+    border-left:4px solid #ff8f00;border-radius:12px;
+    padding:20px 24px;color:#bf360c;
+    font-style:italic;font-size:1.05rem;line-height:1.7;max-width:420px;
+  }
+  .share-btn{
+    background:linear-gradient(135deg,#ff8f00,#bf360c);
+    color:#fff;border:none;padding:14px 40px;border-radius:50px;
+    font-size:1rem;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 30px rgba(191,54,12,.3);transition:transform .2s;
+  }
+  .share-btn:hover{transform:translateY(-3px)}
+  /* Sparkle on click */
+  .sparkle{position:fixed;pointer-events:none;z-index:20;font-size:18px;animation:sp 1s ease-out forwards}
+  @keyframes sp{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.2) translateY(-60px)}}
+</style>
+</head>
+<body>
+<div class="floaties" id="floatiesContainer"></div>
+<div class="wrapper">
+  <div class="rakhi-icon">🪢</div>
+  <h1>Happy Raksha Bandhan!</h1>
+  <div class="names-plate">
+    <div class="name-pill" id="siblingName">Dear Sibling</div>
+    <div class="mid">🪢</div>
+    <div class="name-pill" id="fromName">With Love</div>
+  </div>
+  <div class="from-badge">🌸 May this bond be eternal</div>
+  <div class="row">🪢💛🌸❤️✨</div>
+  <div class="card">
+    On this sacred day of Raksha Bandhan, I celebrate our beautiful bond.
+    You are my protector, my guide, and my best friend.
+    This Rakhi is a symbol of my endless love and gratitude! 💛
+  </div>
+  <div class="quote">
+    "A sibling is both your mirror and your opposite — your greatest gift and your deepest bond." 🪢
+  </div>
+  <button class="share-btn" onclick="share()">🪢 Share This Wish</button>
+</div>
+
+<script>
+function getParams(){
+  const hash=location.hash.slice(1);const p={};
+  new URLSearchParams(hash).forEach((v,k)=>p[k]=decodeURIComponent(v));return p;
+}
+const p=getParams();
+document.getElementById('siblingName').textContent=p.sibling||'Dear Sibling';
+document.getElementById('fromName').textContent=p.from_name||'With Love';
+document.title=`🪢 Happy Raksha Bandhan ${p.sibling||''}!`;
+
+const fc=document.getElementById('floatiesContainer');
+const items=['🌸','💛','🪢','✨','🌺','⭐','💐'];
+for(let i=0;i<22;i++){
+  const el=document.createElement('div');el.className='floaty';
+  el.textContent=items[Math.floor(Math.random()*items.length)];
+  el.style.cssText=`left:${Math.random()*100}%;font-size:${14+Math.random()*14}px;animation-duration:${5+Math.random()*7}s;animation-delay:${Math.random()*7}s;`;
+  fc.appendChild(el);
+}
+
+document.addEventListener('click',e=>{
+  ['🌸','💛','🪢','✨'].forEach((em,i)=>{
+    const el=document.createElement('div');el.className='sparkle';
+    el.textContent=em;
+    el.style.cssText=`left:${e.clientX+Math.random()*50-25}px;top:${e.clientY+Math.random()*50-25}px;animation-delay:${i*0.05}s`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1000);
+  });
+});
+
+async function share(){
+  if(navigator.share) await navigator.share({title:`Happy Raksha Bandhan ${p.sibling||''}!`,url:location.href});
+  else{await navigator.clipboard.writeText(location.href);alert('Link copied! 🪢');}
+}
+</script>
+</body>
+</html>

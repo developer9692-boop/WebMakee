@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🪔 Happy Diwali!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lato:wght@300;400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(160deg,#0a0a1a 0%,#1a0a00 50%,#2d1600 100%);
+    font-family:'Lato',sans-serif;overflow-x:hidden;
+    position:relative;
+  }
+
+  /* Stars */
+  .stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle linear infinite}
+  @keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.1;transform:scale(.5)}}
+
+  /* Diyas */
+  .diyas-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+  .diya{font-size:2.5rem;animation:flicker .5s ease-in-out infinite alternate}
+  .diya:nth-child(2n){animation-delay:.25s}
+  .diya:nth-child(3n){animation-delay:.1s}
+  @keyframes flicker{from{filter:brightness(1);transform:scale(1)}to{filter:brightness(1.4);transform:scale(1.08)}}
+
+  .wrapper{
+    position:relative;z-index:10;max-width:540px;margin:0 auto;
+    min-height:100vh;padding:40px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    animation:rise .9s ease;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  h1{
+    font-family:'Cinzel',serif;
+    font-size:clamp(2rem,7vw,3rem);
+    color:#ffd700;text-align:center;
+    text-shadow:0 0 30px #ff8c00,0 0 60px #ff4500;
+    animation:goldenGlow 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes goldenGlow{from{text-shadow:0 0 20px #ff8c00}to{text-shadow:0 0 60px #ffd700,0 0 100px #ff8c00}}
+
+  .name-box{
+    background:linear-gradient(135deg,#ff8c00,#ffd700);
+    color:#1a0a00;padding:16px 44px;border-radius:60px;
+    font-size:clamp(1.5rem,5vw,2rem);font-weight:700;
+    box-shadow:0 8px 40px rgba(255,200,0,.4);
+    animation:glow 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes glow{from{box-shadow:0 8px 40px rgba(255,200,0,.4)}to{box-shadow:0 12px 60px rgba(255,140,0,.8)}}
+
+  .from-badge{
+    border:2px solid #ffd700;
+    color:#ffd700;padding:10px 28px;border-radius:40px;
+    font-size:.95rem;font-weight:600;background:rgba(255,215,0,.1);
+    backdrop-filter:blur(5px);
+  }
+  .card{
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,215,0,.3);
+    border-radius:24px;padding:28px 30px;max-width:420px;width:100%;
+    box-shadow:0 8px 40px rgba(255,200,0,.1);
+    text-align:center;line-height:1.8;color:#fde8b0;font-size:1.05rem;
+    backdrop-filter:blur(8px);
+  }
+  .rangoli{font-size:2.5rem;letter-spacing:.4em;animation:rotate 8s linear infinite}
+  @keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .quote{
+    border-left:4px solid #ffd700;border-radius:12px;
+    padding:20px 24px;color:#ffd700;
+    font-style:italic;font-size:1.05rem;line-height:1.7;max-width:420px;
+    background:rgba(255,215,0,.08);backdrop-filter:blur(5px);
+  }
+  .share-btn{
+    background:linear-gradient(135deg,#ff8c00,#ffd700);
+    color:#1a0a00;border:none;padding:14px 40px;border-radius:50px;
+    font-size:1rem;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 30px rgba(255,200,0,.4);transition:transform .2s;
+  }
+  .share-btn:hover{transform:translateY(-3px)}
+
+  /* Fireworks */
+  .fw{position:fixed;pointer-events:none;z-index:5;width:8px;height:8px;border-radius:50%;animation:fw 1.2s ease-out forwards}
+  @keyframes fw{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+</style>
+</head>
+<body>
+<div class="stars" id="starsContainer"></div>
+<div class="wrapper">
+  <div class="diyas-row">
+    <div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div>
+    <div class="diya">🪔</div><div class="diya">🪔</div>
+  </div>
+  <h1>✨ Shubh Diwali! ✨</h1>
+  <div class="name-box" id="personName">Dear Friend</div>
+  <div class="from-badge" id="fromBadge">🙏 Wishes from …</div>
+  <div class="rangoli">🌸</div>
+  <div class="card">
+    May the festival of lights fill your life with joy, prosperity, and happiness!
+    May Goddess Lakshmi bless your home with wealth and good fortune.
+    Shubh Diwali! 🙏✨
+  </div>
+  <div class="quote">
+    "May the light of Diwali brighten your life and illuminate your path to success." 🪔
+  </div>
+  <div class="diyas-row">
+    <div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div>
+  </div>
+  <button class="share-btn" onclick="share()">🪔 Share Diwali Wishes</button>
+</div>
+
+<script>
+function getParams(){
+  const hash=location.hash.slice(1);const p={};
+  new URLSearchParams(hash).forEach((v,k)=>p[k]=decodeURIComponent(v));return p;
+}
+const p=getParams();
+document.getElementById('personName').textContent=p.name||'Dear Friend';
+document.getElementById('fromBadge').textContent=`🙏 Wishes from ${p.from_name||'Your Loved One'}`;
+document.title=`🪔 Happy Diwali ${p.name||''}!`;
+
+// Stars
+const sc=document.getElementById('starsContainer');
+for(let i=0;i<80;i++){
+  const el=document.createElement('div');el.className='star';
+  const size=Math.random()*3+1;
+  el.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${1+Math.random()*3}s;animation-delay:${Math.random()*3}s;`;
+  sc.appendChild(el);
+}
+
+// Fireworks
+const fwColors=['#ffd700','#ff8c00','#ff4500','#ff69b4','#00bfff','#39ff14'];
+function launchFW(){
+  for(let i=0;i<10;i++){
+    const fw=document.createElement('div');fw.className='fw';
+    const angle=(360/10)*i*(Math.PI/180);
+    const dist=50+Math.random()*70;
+    fw.style.cssText=`left:${20+Math.random()*60}%;top:${10+Math.random()*60}%;background:${fwColors[Math.floor(Math.random()*fwColors.length)]};--dx:${Math.cos(angle)*dist}px;--dy:${Math.sin(angle)*dist}px;`;
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1200);
+  }
+}
+launchFW();setInterval(launchFW,2000);
+
+async function share(){
+  if(navigator.share) await navigator.share({title:`Shubh Diwali ${p.name||''}!`,url:location.href});
+  else{await navigator.clipboard.writeText(location.href);alert('Link copied! 🪔');}
+}
+</script>
+</body>
+</html>

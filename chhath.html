@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🌅 Chhath Puja Wishes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Lato:wght@300;400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(180deg,#ff6600 0%,#ff9500 25%,#ffcc44 50%,#3a7bd5 75%,#1a4a8a 100%);
+    font-family:'Lato',sans-serif;overflow-x:hidden;position:relative;
+  }
+
+  /* Sun animation */
+  .sun{
+    position:fixed;top:60px;left:50%;transform:translateX(-50%);
+    width:120px;height:120px;
+    background:radial-gradient(circle,#fff9c4,#ffd700,#ff8c00);
+    border-radius:50%;
+    box-shadow:0 0 60px #ffd700,0 0 120px #ff8c00,0 0 200px rgba(255,200,0,.4);
+    animation:sunPulse 3s ease-in-out infinite;z-index:0;
+  }
+  @keyframes sunPulse{0%,100%{box-shadow:0 0 60px #ffd700,0 0 120px #ff8c00}50%{box-shadow:0 0 100px #ffd700,0 0 200px #ff8c00}}
+
+  /* Water waves */
+  .wave{position:fixed;bottom:0;left:0;width:200%;height:120px;z-index:0;animation:waveMove linear infinite}
+  .wave svg{width:100%;height:100%}
+  .wave1{animation-duration:8s;opacity:.6}
+  .wave2{animation-duration:12s;animation-delay:-4s;opacity:.4;bottom:10px}
+  @keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* Floating diyas on water */
+  .floating-items{position:fixed;bottom:80px;width:100%;pointer-events:none;z-index:2}
+  .float-item{position:absolute;animation:floatItem 6s ease-in-out infinite}
+  @keyframes floatItem{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(5deg)}}
+
+  .wrapper{
+    position:relative;z-index:10;max-width:540px;margin:0 auto;
+    min-height:100vh;padding:200px 24px 160px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;
+    animation:rise .9s ease;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+  h1{
+    font-size:clamp(1.8rem,6vw,2.8rem);font-weight:700;
+    color:#fff;text-align:center;
+    text-shadow:0 2px 20px rgba(0,0,0,.4),0 0 30px rgba(255,200,0,.5);
+  }
+  .subtitle{color:rgba(255,255,255,.9);font-size:1rem;text-align:center}
+  .name-box{
+    background:linear-gradient(135deg,#ff8c00,#ffd700);
+    color:#1a0a00;padding:16px 44px;border-radius:60px;
+    font-size:clamp(1.5rem,5vw,2rem);font-weight:700;
+    box-shadow:0 8px 40px rgba(255,200,0,.5);
+    animation:glow 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes glow{from{box-shadow:0 8px 40px rgba(255,200,0,.5)}to{box-shadow:0 12px 60px rgba(255,140,0,.9)}}
+  .from-badge{
+    background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);
+    color:#fff;padding:10px 28px;border-radius:40px;font-size:.95rem;font-weight:600;
+    backdrop-filter:blur(8px);
+  }
+  .card{
+    background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+    border-radius:24px;padding:28px 30px;max-width:420px;width:100%;
+    text-align:center;line-height:1.9;color:#fff;font-size:1rem;
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 40px rgba(0,0,0,.2);
+  }
+  .icons-row{font-size:2rem;letter-spacing:.6em;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+  .quote{
+    background:rgba(255,255,255,.1);border-left:4px solid #ffd700;
+    border-radius:12px;padding:20px 24px;color:#fff9c4;
+    font-style:italic;font-size:1rem;line-height:1.7;max-width:420px;
+    backdrop-filter:blur(8px);
+  }
+  .share-btn{
+    background:linear-gradient(135deg,#ff8c00,#ffd700);
+    color:#1a0a00;border:none;padding:14px 40px;border-radius:50px;
+    font-size:1rem;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 30px rgba(255,200,0,.5);transition:transform .2s;
+  }
+  .share-btn:hover{transform:translateY(-3px)}
+</style>
+</head>
+<body>
+<div class="sun"></div>
+
+<!-- Waves -->
+<div class="wave wave1">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path fill="#1a6fa8" fill-opacity="0.6" d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z"/>
+    <path fill="#1a4a8a" fill-opacity="0.8" d="M0,80 C360,40 720,100 1080,60 C1260,40 1350,80 1440,70 L1440,120 L0,120 Z"/>
+  </svg>
+</div>
+<div class="wave wave2">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path fill="#0d3b6e" fill-opacity="0.5" d="M0,40 C180,80 360,20 540,60 C720,100 900,20 1080,60 C1260,100 1440,40 1440,60 L1440,120 L0,120 Z"/>
+  </svg>
+</div>
+
+<div class="floating-items">
+  <div class="float-item" style="left:10%">🪔</div>
+  <div class="float-item" style="left:30%;animation-delay:1s">🌸</div>
+  <div class="float-item" style="left:50%;animation-delay:2s">🪔</div>
+  <div class="float-item" style="left:70%;animation-delay:.5s">🌺</div>
+  <div class="float-item" style="left:88%;animation-delay:1.5s">🪔</div>
+</div>
+
+<div class="wrapper">
+  <h1>🌅 Chhath Puja ki Hardik Shubhkamnaayein!</h1>
+  <div class="subtitle">छठ पर्व की हार्दिक शुभकामनाएं</div>
+  <div class="name-box" id="personName">Dear Devotee</div>
+  <div class="from-badge" id="fromBadge">🙏 Wishes from …</div>
+  <div class="icons-row">🌅🪔🌸🙏☀️</div>
+  <div class="card">
+    May the divine blessings of Chhathi Maiya bring happiness, prosperity, and good health to you and your family.
+    May Surya Dev illuminate your life with joy and success.
+    Chhath Puja ki Shubhkamnaayein! 🙏
+  </div>
+  <div class="quote">
+    "Just as the rising sun blesses all equally, may this Chhath Puja bring equal blessings of health, wealth and happiness to your home." ☀️
+  </div>
+  <button class="share-btn" onclick="share()">🌅 Share Chhath Wishes</button>
+</div>
+
+<script>
+function getParams(){
+  const hash=location.hash.slice(1);const p={};
+  new URLSearchParams(hash).forEach((v,k)=>p[k]=decodeURIComponent(v));return p;
+}
+const p=getParams();
+document.getElementById('personName').textContent=p.name||'Dear Devotee';
+document.getElementById('fromBadge').textContent=`🙏 Wishes from ${p.from_name||'Your Loved One'}`;
+document.title=`🌅 Chhath Puja Wishes for ${p.name||''}!`;
+
+async function share(){
+  if(navigator.share) await navigator.share({title:`Chhath Puja Wishes for ${p.name||''}!`,url:location.href});
+  else{await navigator.clipboard.writeText(location.href);alert('Link copied! 🌅');}
+}
+</script>
+</body>
+</html>

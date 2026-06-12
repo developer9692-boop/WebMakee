@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>💕 Love Day</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;
+    background:linear-gradient(160deg,#fff0f5 0%,#ffe6f0 40%,#ffd6e7 100%);
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ── Floating hearts ── */
+  .hearts-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .heart{
+    position:absolute;bottom:-60px;
+    font-size:24px;
+    animation:heartFloat linear infinite;
+    opacity:.7;
+  }
+  @keyframes heartFloat{
+    0%{bottom:-60px;opacity:0;transform:translateX(0) scale(.8)}
+    10%{opacity:.7}
+    90%{opacity:.5}
+    100%{bottom:110%;opacity:0;transform:translateX(30px) scale(1.2)}
+  }
+
+  /* ── Main card ── */
+  .wrapper{
+    position:relative;z-index:10;
+    max-width:540px;margin:0 auto;
+    min-height:100vh;padding:40px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+    animation:fadeIn .9s ease;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  /* big heart */
+  .big-heart{
+    font-size:90px;
+    animation:heartbeat .8s ease-in-out infinite;
+    filter:drop-shadow(0 0 30px rgba(255,100,150,.5));
+  }
+  @keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    14%{transform:scale(1.15)}
+    28%{transform:scale(1)}
+    42%{transform:scale(1.1)}
+    70%{transform:scale(1)}
+  }
+
+  h1{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(2.2rem,8vw,3.5rem);
+    color:#c2185b;
+    text-align:center;
+    text-shadow:0 2px 20px rgba(194,24,91,.25);
+  }
+
+  /* Names plate */
+  .names-plate{
+    background:#fff;
+    border-radius:60px;
+    padding:18px 40px;
+    box-shadow:0 8px 40px rgba(255,100,150,.2);
+    display:flex;align-items:center;gap:18px;
+    flex-wrap:wrap;justify-content:center;
+  }
+  .name-pill{
+    font-size:1.4rem;font-weight:600;color:#c2185b;
+    background:linear-gradient(135deg,#ffe6f0,#ffc0cb);
+    padding:8px 24px;border-radius:40px;
+  }
+  .heart-mid{font-size:2rem;animation:heartbeat .8s ease-in-out infinite}
+
+  /* Date badge */
+  .date-badge{
+    background:linear-gradient(135deg,#ff69b4,#c2185b);
+    color:#fff;
+    padding:12px 32px;border-radius:40px;
+    font-size:1rem;font-weight:600;
+    box-shadow:0 6px 24px rgba(194,24,91,.3);
+    letter-spacing:.03em;
+  }
+
+  /* Days counter */
+  .days-box{
+    background:#fff;
+    border-radius:24px;
+    padding:24px 40px;
+    text-align:center;
+    box-shadow:0 8px 40px rgba(255,100,150,.15);
+    width:100%;max-width:320px;
+  }
+  .days-num{
+    font-size:4rem;font-weight:700;
+    background:linear-gradient(135deg,#ff69b4,#c2185b);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    animation:pulse .8s ease-in-out infinite alternate;
+  }
+  @keyframes pulse{from{transform:scale(1)}to{transform:scale(1.05)}}
+  .days-label{color:#888;font-size:.9rem;margin-top:4px}
+
+  /* Message */
+  .message{
+    background:#fff;
+    border-left:4px solid #ff69b4;
+    border-radius:16px;
+    padding:22px 28px;
+    color:#555;
+    text-align:center;
+    font-size:1rem;line-height:1.8;
+    max-width:420px;
+    box-shadow:0 4px 20px rgba(255,100,150,.1);
+    font-family:'Dancing Script',cursive;
+    font-size:1.15rem;
+  }
+
+  .rose-row{font-size:2rem;letter-spacing:.6em;animation:sway 2s ease-in-out infinite alternate}
+  @keyframes sway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+
+  .share-btn{
+    background:linear-gradient(135deg,#ff69b4,#c2185b);
+    color:#fff;border:none;
+    padding:14px 40px;border-radius:50px;
+    font-size:1rem;font-weight:600;cursor:pointer;
+    box-shadow:0 8px 30px rgba(194,24,91,.35);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .share-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(194,24,91,.5)}
+
+  /* Petals */
+  .petal{
+    position:fixed;top:-20px;pointer-events:none;z-index:2;
+    font-size:18px;
+    animation:petalFall linear infinite;
+  }
+  @keyframes petalFall{
+    0%{top:-20px;opacity:1;transform:translateX(0) rotate(0deg)}
+    100%{top:110vh;opacity:.4;transform:translateX(60px) rotate(360deg)}
+  }
+</style>
+</head>
+<body>
+<div class="hearts-bg" id="heartsContainer"></div>
+<div id="petalContainer"></div>
+
+<div class="wrapper">
+  <div class="big-heart">💕</div>
+  <h1>Our Love Story</h1>
+
+  <div class="names-plate">
+    <div class="name-pill" id="boyName">Boy</div>
+    <div class="heart-mid">❤️</div>
+    <div class="name-pill" id="girlName">Girl</div>
+  </div>
+
+  <div class="date-badge" id="dateBadge">📅 Together since …</div>
+
+  <div class="days-box">
+    <div class="days-num" id="daysNum">0</div>
+    <div class="days-label">💞 Days of Pure Love Together</div>
+  </div>
+
+  <div class="rose-row">🌹🌸🌺</div>
+
+  <div class="message" id="loveMsg">
+    "Every day with you is a beautiful adventure.<br>
+    You are my heart, my home, my everything. 💖"
+  </div>
+
+  <button class="share-btn" onclick="share()">💌 Share Our Love Page</button>
+</div>
+
+<script>
+function getParams(){
+  const hash=location.hash.slice(1);
+  const p={};
+  new URLSearchParams(hash).forEach((v,k)=>p[k]=decodeURIComponent(v));
+  return p;
+}
+const p=getParams();
+
+document.getElementById('boyName').textContent  = p.boy  || 'My Love';
+document.getElementById('girlName').textContent = p.girl || 'My Heart';
+document.title=`💕 ${p.boy||'Our'} & ${p.girl||'Love'} – Love Day`;
+
+if(p.date){
+  const [dd,mm,yyyy]=p.date.split('-').map(Number);
+  const start=new Date(yyyy,mm-1,dd);
+  const now=new Date();
+  const days=Math.floor((now-start)/(1000*60*60*24));
+  document.getElementById('dateBadge').textContent=`📅 Together since ${p.date}`;
+  let c=0;const t=setInterval(()=>{
+    document.getElementById('daysNum').textContent=++c;
+    if(c>=days)clearInterval(t);
+  },days>200?5:20);
+}
+
+// Floating hearts
+const hc=document.getElementById('heartsContainer');
+const heartEmojis=['❤️','💕','💗','💓','💖','💝','🌹','💘'];
+for(let i=0;i<20;i++){
+  const el=document.createElement('div');
+  el.className='heart';
+  el.textContent=heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+  el.style.cssText=`
+    left:${Math.random()*100}%;
+    font-size:${14+Math.random()*20}px;
+    animation-duration:${5+Math.random()*8}s;
+    animation-delay:${Math.random()*6}s;
+  `;
+  hc.appendChild(el);
+}
+
+// Rose petals
+const pc=document.getElementById('petalContainer');
+for(let i=0;i<30;i++){
+  const el=document.createElement('div');
+  el.className='petal';
+  el.textContent='🌸';
+  el.style.cssText=`
+    left:${Math.random()*100}%;
+    font-size:${10+Math.random()*14}px;
+    animation-duration:${6+Math.random()*8}s;
+    animation-delay:${Math.random()*8}s;
+  `;
+  pc.appendChild(el);
+}
+
+async function share(){
+  const title=`💕 ${p.boy||'Our'} & ${p.girl||'Our'} Love Day`;
+  if(navigator.share) await navigator.share({title,url:location.href});
+  else{
+    await navigator.clipboard.writeText(location.href);
+    alert('Link copied! Share your love story 💝');
+  }
+}
+</script>
+</body>
+</html>
