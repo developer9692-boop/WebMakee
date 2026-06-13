@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy New Year 🎊</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #FFD700;
+      --gold2:   #FFA500;
+      --rose:    #FF6B9D;
+      --deep:    #0A0015;
+      --midnight:#120025;
+      --silver:  #C0C0C0;
+      --white:   #FFFFFF;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--deep);
+      overflow-x: hidden;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    /* ── Starfield ─────────────────────── */
+    #stars-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Fireworks canvas ──────────────── */
+    #fw-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ── Main layout ───────────────────── */
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+
+    /* ── Countdown ring ────────────────── */
+    .countdown-ring {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(var(--midnight), var(--midnight)) padding-box,
+                  linear-gradient(135deg, var(--gold), var(--rose), var(--gold2)) border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+      animation: ringPulse 3s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(255,215,0,0.25);
+    }
+    .countdown-ring .count-num {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 52px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .countdown-ring .count-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-top: 4px;
+    }
+    @keyframes ringPulse {
+      0%, 100% { transform: scale(1);   box-shadow: 0 0 40px rgba(255,215,0,.25); }
+      50%       { transform: scale(1.04); box-shadow: 0 0 70px rgba(255,215,0,.50); }
+    }
+
+    /* ── Year badge ────────────────────── */
+    .year-badge {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(72px, 18vw, 120px);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 40%, var(--rose) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -2px;
+      filter: drop-shadow(0 0 30px rgba(255,215,0,.5));
+      animation: floatIn 1s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* ── Heading ───────────────────────── */
+    .happy-text {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(22px, 6vw, 42px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      animation: floatIn 1s .15s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* ── Recipient card ────────────────── */
+    .recipient-card {
+      margin-top: 32px;
+      padding: 28px 40px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      animation: floatIn 1s .3s cubic-bezier(.22,1,.36,1) both;
+      max-width: 480px;
+      width: 100%;
+    }
+    .recipient-card .to-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--gold2);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .recipient-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(26px, 7vw, 48px);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+    .wish-text {
+      margin-top: 16px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Timer strip ───────────────────── */
+    .timer-strip {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: floatIn 1s .45s cubic-bezier(.22,1,.36,1) both;
+    }
+    .timer-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 68px;
+      padding: 14px 10px 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .timer-box .t-num {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .timer-box .t-unit {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-top: 5px;
+    }
+
+    /* ── Sparkle dots ──────────────────── */
+    .sparkles {
+      display: flex;
+      gap: 10px;
+      margin-top: 32px;
+      animation: floatIn 1s .6s cubic-bezier(.22,1,.36,1) both;
+    }
+    .sparkle {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: sparkleAnim 1.4s ease-in-out infinite;
+    }
+    .sparkle:nth-child(2) { background: var(--rose);  animation-delay: .2s; }
+    .sparkle:nth-child(3) { background: var(--gold2); animation-delay: .4s; }
+    .sparkle:nth-child(4) { background: var(--white); animation-delay: .6s; }
+    .sparkle:nth-child(5) { background: var(--rose);  animation-delay: .8s; }
+    @keyframes sparkleAnim {
+      0%,100% { transform: scale(1);   opacity:.8; }
+      50%      { transform: scale(1.8); opacity: 1; }
+    }
+
+    /* ── Share button ──────────────────── */
+    .share-btn {
+      margin-top: 36px;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000;
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform .2s, box-shadow .2s;
+      animation: floatIn 1s .75s cubic-bezier(.22,1,.36,1) both;
+    }
+    .share-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255,215,0,.4); }
+    .share-btn:active { transform: translateY(0); }
+
+    /* ── Footer ────────────────────────── */
+    .footer {
+      margin-top: 48px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 2px;
+      animation: floatIn 1s .9s cubic-bezier(.22,1,.36,1) both;
+    }
+    .footer a { color: var(--gold2); text-decoration: none; }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Reduced motion ────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+<canvas id="fw-canvas"></canvas>
+
+<div class="page">
+
+  <div class="countdown-ring">
+    <span class="count-num" id="main-countdown">--</span>
+    <span class="count-label" id="main-unit">loading</span>
+  </div>
+
+  <div class="year-badge" id="year-badge">2025</div>
+  <div class="happy-text">✨ Happy New Year ✨</div>
+
+  <div class="recipient-card">
+    <div class="to-label">Wishing</div>
+    <div class="recipient-name" id="recipient-name">Dear Friend</div>
+    <p class="wish-text">
+      May this New Year bring you endless joy, beautiful moments,<br>
+      and every dream you've ever hoped for. 🥂🎉
+    </p>
+  </div>
+
+  <div class="timer-strip" id="timer-strip">
+    <div class="timer-box"><span class="t-num" id="t-days">00</span><span class="t-unit">Days</span></div>
+    <div class="timer-box"><span class="t-num" id="t-hours">00</span><span class="t-unit">Hours</span></div>
+    <div class="timer-box"><span class="t-num" id="t-mins">00</span><span class="t-unit">Mins</span></div>
+    <div class="timer-box"><span class="t-num" id="t-secs">00</span><span class="t-unit">Secs</span></div>
+  </div>
+
+  <div class="sparkles">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+  </div>
+
+  <a class="share-btn" id="share-btn" href="#">🎊 Share this Wish</a>
+
+  <div class="footer">
+    Made with ❤️ by <a href="https://techbosster.vercel.app" target="_blank">TechBosster</a>
+  </div>
+
+</div>
+
+<script>
+/* ── Parse URL hash params ─────────────────────────────── */
+function getHashParams() {
+  const hash = location.hash.replace(/^#/, '');
+  const params = {};
+  hash.split('&').forEach(pair => {
+    const [k, v] = pair.split('=');
+    if (k) params[decodeURIComponent(k)] = decodeURIComponent(v || '');
+  });
+  return params;
+}
+
+/* ── Inject recipient name ─────────────────────────────── */
+(function() {
+  const p = getHashParams();
+  const name = p.name || p.Name || '';
+  if (name) {
+    document.getElementById('recipient-name').textContent = name;
+    document.title = `Happy New Year, ${name}! 🎊`;
+  }
+  // Set share button
+  document.getElementById('share-btn').href =
+    `https://wa.me/?text=${encodeURIComponent('🎊 Happy New Year! ' + location.href)}`;
+})();
+
+/* ── Figure out next New Year ──────────────────────────── */
+function getNextNewYear() {
+  const now  = new Date();
+  const year = now.getFullYear();
+  const ny   = new Date(year + 1, 0, 1, 0, 0, 0, 0);
+  document.getElementById('year-badge').textContent = year + 1;
+  return ny;
+}
+
+/* ── Countdown logic ───────────────────────────────────── */
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function updateCountdown() {
+  const target = getNextNewYear();
+  const now    = new Date();
+  const diff   = target - now;
+
+  if (diff <= 0) {
+    // It's New Year!
+    document.getElementById('main-countdown').textContent = '🎊';
+    document.getElementById('main-unit').textContent = 'Happy New Year!';
+    document.getElementById('timer-strip').style.display = 'none';
+    launchFireworks(true);
+    return;
+  }
+
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  const secs  = Math.floor((diff % 60000)    / 1000);
+
+  document.getElementById('t-days').textContent  = pad(days);
+  document.getElementById('t-hours').textContent = pad(hours);
+  document.getElementById('t-mins').textContent  = pad(mins);
+  document.getElementById('t-secs').textContent  = pad(secs);
+
+  if (days > 0) {
+    document.getElementById('main-countdown').textContent = days;
+    document.getElementById('main-unit').textContent      = days === 1 ? 'Day Left' : 'Days Left';
+  } else if (hours > 0) {
+    document.getElementById('main-countdown').textContent = hours;
+    document.getElementById('main-unit').textContent      = hours === 1 ? 'Hour Left' : 'Hours Left';
+  } else if (mins > 0) {
+    document.getElementById('main-countdown').textContent = mins;
+    document.getElementById('main-unit').textContent      = 'Minutes Left';
+  } else {
+    document.getElementById('main-countdown').textContent = secs;
+    document.getElementById('main-unit').textContent      = 'Seconds Left';
+  }
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ── Starfield ─────────────────────────────────────────── */
+(function() {
+  const canvas = document.getElementById('stars-canvas');
+  const ctx    = canvas.getContext('2d');
+  let stars    = [];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: 180 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.4 + 0.3,
+      a: Math.random(),
+      da: (Math.random() * 0.006 + 0.002) * (Math.random() < 0.5 ? 1 : -1)
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.a += s.da;
+      if (s.a > 1 || s.a < 0) s.da *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, Math.min(1, s.a))})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+/* ── Fireworks ─────────────────────────────────────────── */
+(function() {
+  const canvas  = document.getElementById('fw-canvas');
+  const ctx     = canvas.getContext('2d');
+  let particles = [];
+  let launching = false;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const COLORS = [
+    '#FFD700','#FFA500','#FF6B9D','#FF4444',
+    '#44AAFF','#AAFFAA','#FFFFFF','#FF88FF'
+  ];
+
+  function explode(x, y) {
+    const count = 60 + Math.floor(Math.random() * 40);
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count;
+      const speed = Math.random() * 5 + 2;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        color,
+        r: Math.random() * 3 + 1,
+        gravity: 0.08
+      });
+    }
+  }
+
+  function launchRocket() {
+    const x = Math.random() * canvas.width;
+    const y = canvas.height * (0.2 + Math.random() * 0.5);
+    explode(x, y);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.alpha > 0.02);
+    particles.forEach(p => {
+      p.x     += p.vx;
+      p.y     += p.vy;
+      p.vy    += p.gravity;
+      p.vx    *= 0.98;
+      p.alpha -= 0.016;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + Math.floor(p.alpha * 255).toString(16).padStart(2, '0');
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  // Periodic fireworks
+  function scheduleFirework() {
+    launchRocket();
+    setTimeout(scheduleFirework, 800 + Math.random() * 1200);
+  }
+
+  // Expose for "New Year" moment
+  window.launchFireworks = function(intense) {
+    if (intense) {
+      for (let i = 0; i < 8; i++) setTimeout(() => launchRocket(), i * 150);
+    } else {
+      launchRocket();
+    }
+  };
+
+  // Start light ambient fireworks after 1.5s
+  setTimeout(scheduleFirework, 1500);
+  draw();
+})();
+</script>
+</body>
+</html>
